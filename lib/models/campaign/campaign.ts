@@ -14,11 +14,6 @@ export enum CampaignType
 export class Campaign extends SoftDeletable
 {
     /**
-     * The account to which this campaign belongs.
-     */
-    public AccountId: number;
-
-    /**
      * The subscription that contacts who espond to this campaign are opted into.
      */
     public SubscriptionId: number;

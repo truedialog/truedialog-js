@@ -1,6 +1,15 @@
 import { ICollection } from "../interfaces";
 
-import { Account, Campaign } from "../models";
+import { Account, BaseAccount, Campaign, ActionPushCampaign } from "../models";
+
+interface IBaseContext<T extends BaseAccount>
+{
+    get(id: number, accountId?: number): Promise<T>;
+    getAll(accountId?: number): Promise<ICollection<T>>;
+    create(item: T, accountId?: number): Promise<T>;
+    update(item: T): Promise<T>;
+    delete(item: T | number, accountId?: number): Promise<void>;
+}
 
 export interface IAccountContext
 {
@@ -29,3 +38,9 @@ export interface ICampaignContext
 }
 
 export const ICampaignContext: unique symbol = Symbol("td:sdk:context:campaign");
+
+export interface IActionPushCampaignContext extends IBaseContext<ActionPushCampaign>
+{
+}
+
+export const IActionPushCampaignContext: unique symbol = Symbol("td:sdk:context:action:pushCampaign");

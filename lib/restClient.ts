@@ -1,6 +1,6 @@
 import { IRestClient, IConfigProvider, Map } from "./interfaces";
 
-//import fetch from "node-fetch";
+import fetch from "node-fetch";
 
 // Add atob for node.js
 
@@ -13,6 +13,8 @@ export class RestClient implements IRestClient
 {
     private baseUri: string;
     private creds: string;
+    private accountId: number;
+    private asAccountId?: number;
     
     constructor(config: IConfigProvider)
     {
@@ -34,10 +36,26 @@ export class RestClient implements IRestClient
         }
         
         this.creds = "Basic " + atob(key + ":" + secret);
+
+        this.accountId = config.get("accountId");
+
+        if (!this.accountId)
+            throw "Missing accountId in config"
+
+        this.asAccountId = null;
+    }
+
+    public asAccount(id: number): IRestClient
+    {
+        this.asAccountId = id;
+        return this;
     }
 
     private subsitute(uri: string, args: any): string
     {
+        args.AccountId = this.asAccountId || this.accountId;
+        this.asAccountId = null;
+
         let dict: Map<any> = args;
 
         let replacer = function(match: string): string 
@@ -47,7 +65,7 @@ export class RestClient implements IRestClient
             if (typeof val === "function")
                 val = val.call(args);
 
-            return val?.toString() ?? "";
+            return val?.toString() || "";
         }
 
         return uri.replace(/(\{.*?\})/g, replacer);

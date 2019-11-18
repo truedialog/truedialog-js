@@ -18,6 +18,8 @@ export const IConfigPorivder: unique symbol = Symbol("td:sdk:configProvider");
 
 export interface IRestClient
 {
+    asAccount(id: number): IRestClient;
+
     get<T>(uri: string, args: any): Promise<T>;
     post<S, T>(uri: string, args: any, body: S): Promise<T>;
     put<S, T>(uri: string, args: any, body: S): Promise<T>;

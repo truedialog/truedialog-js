@@ -1,6 +1,6 @@
-import { Base } from "./base";
+import { BaseAccount } from "./baseAccount";
 
-export class BaseAudited extends Base
+export class BaseAudited extends BaseAccount
 {
     /**
      * When this object was first created

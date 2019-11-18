@@ -1,5 +1,5 @@
 {
-    "baseUrl": "https://api.truedialog.com/api/v2.1/",
+    "baseUri": "https://api.truedialog.com/api/v2.1/",
     "apiKey": "--  FILL IN WITH YOUR API KEY HERE --",
     "secret": "-- FILL IN WITH YOUR SECRET HERE --",
     "accountId": "-- FILL IN WITH YOUR ACCOUNT ID HERE --"

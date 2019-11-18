@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 
 export class JsonConfig implements IConfigProvider
 {
-    private config: Map<any>;    
+    private readonly config: Map<any>;
 
     constructor()
     {
