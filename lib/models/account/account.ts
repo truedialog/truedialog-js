@@ -1,12 +1,10 @@
-import { IModelBase } from "./interfaces";
+import { Base } from "../base";
+import { ICollection } from "../../interfaces";
 
-export class Account implements IModelBase
+import { AccountAttribute } from "./accountAttribute";
+
+export class Account extends Base
 {
-    /**
-     * Unique ID of the account.
-     */
-    public Id: number;
-
     /**
      * The current status of the account
      */
@@ -41,6 +39,8 @@ export class Account implements IModelBase
      * List of channel IDs this account is able to send and receive on.
      */
     public Channels: [number];
+
+    public Attributes: ICollection<AccountAttribute>;
 
     /**
      * 

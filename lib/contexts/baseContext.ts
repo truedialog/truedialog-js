@@ -1,7 +1,7 @@
-import { ICollection, IRestClient } from "../interfaces";
-import { IModelBase } from "../models";
+import { IRestClient } from "../interfaces";
+import { Base } from "../models";
 
-export class BaseContext<T extends IModelBase>
+export class BaseContext<T extends Base>
 {
     protected readonly client: IRestClient;
 

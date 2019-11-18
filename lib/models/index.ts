@@ -1,4 +1,4 @@
-export * from "./interfaces";
+export * from "./base";
 
 export * from "./account";
 export * from "./campaign";

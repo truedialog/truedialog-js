@@ -1,4 +1,4 @@
-import { IModelBase } from "./interfaces";
+import { SoftDeletable } from "../base";
 
 export enum CampaignType
 {
@@ -11,13 +11,8 @@ export enum CampaignType
     Chat = 6
 }
 
-export class Campaign implements IModelBase
+export class Campaign extends SoftDeletable
 {
-    /**
-     * Unique ID of the campaign.
-     */
-    public Id: number;
-
     /**
      * The account to which this campaign belongs.
      */
