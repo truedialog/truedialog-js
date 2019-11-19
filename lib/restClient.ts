@@ -73,6 +73,9 @@ export class RestClient implements IRestClient
 
     private parseType(type: string): string
     {
+        if (!type)
+            return "text/plain";
+
         let idx = type.indexOf(';');
 
         if (idx === -1)

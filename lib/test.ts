@@ -1,6 +1,7 @@
 import { using, Container } from "lepton-di";
 
-import { truedialog, ILogger, IActionContext, IActionPushCampaignContext } from ".";
+import { truedialog, ILogger, IActionContext, IMessageContext } from ".";
+import { IImportContext } from "./contexts";
 
 var container = new Container();
 
@@ -12,10 +13,11 @@ truedialog.register(container);
 
 using (container.beginScope(), scope =>
 {
-    var pushContext: IActionPushCampaignContext = scope.resolve(IActionPushCampaignContext);
+    /*
+    var msgContext: IMessageContext = scope.resolve(IMessageContext);
     var actContext: IActionContext = scope.resolve(IActionContext);
     
-    pushContext.get(22944814)
+    msgContext.get(22944814)
         .then(x =>
         {
             console.log(x);
@@ -26,5 +28,12 @@ using (container.beginScope(), scope =>
 
             //actContext.execute(x.Id, x.AccountId);
         });
+    */
+
+    var importCtx: IImportContext = scope.resolve(IImportContext);
+
+    importCtx
+        .getAll()
+        .then(x => console.log(x));
 });
 

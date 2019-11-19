@@ -2,7 +2,10 @@
 
 import { ICollection } from "../interfaces";
 
-import { Account, Action, ActionBase, ActionPushCampaign, ActionHistory } from "../models";
+import { Account } from "../models";
+
+import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport } from "../models";
+
 import { BaseAccount, Campaign } from "../models";
 
 /* ================================================================================================================= */
@@ -72,10 +75,18 @@ export const IActionContext: unique symbol = Symbol("td:sdk:context:action");
 
 /* ================================================================================================================= */
 
-export interface IActionPushCampaignContext extends IBaseContext<ActionPushCampaign>
+export interface IMessageContext extends IBaseContext<ActionPushCampaign>
 {
 }
 
-export const IActionPushCampaignContext: unique symbol = Symbol("td:sdk:context:action:pushCampaign");
+export const IMessageContext: unique symbol = Symbol("td:sdk:context:action:pushCampaign");
+
+/* ================================================================================================================= */
+
+export interface IImportContext extends IBaseContext<ActionImport>
+{
+}
+
+export const IImportContext: unique symbol = Symbol("td:sdk:context:action:import");
 
 /* ================================================================================================================= */
