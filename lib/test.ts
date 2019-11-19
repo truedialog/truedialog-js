@@ -1,10 +1,30 @@
-import { JsonConfig, RestClient } from ".";
-import { ActionPushCampaignContext } from "./contexts/actionPushCampaignContext";
+import { using, Container } from "lepton-di";
 
-var config = new JsonConfig();
-var client = new RestClient(config);
-var context = new ActionPushCampaignContext(client);
+import { truedialog, ILogger, IActionContext, IActionPushCampaignContext } from ".";
 
-context.getAll()
-    .then(x => console.log(x));
+var container = new Container();
+
+container
+    .register(ILogger)
+    .toInstance(console);
+
+truedialog.register(container);
+
+using (container.beginScope(), scope =>
+{
+    var pushContext: IActionPushCampaignContext = scope.resolve(IActionPushCampaignContext);
+    var actContext: IActionContext = scope.resolve(IActionContext);
+    
+    pushContext.get(22944814)
+        .then(x =>
+        {
+            console.log(x);
+
+            actContext
+                .getHistory(x)
+                .then(y => console.log(y));
+
+            //actContext.execute(x.Id, x.AccountId);
+        });
+});
 

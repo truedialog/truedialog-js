@@ -1,46 +1,46 @@
-import { IRestClient, IConfigProvider, Map } from "./interfaces";
+/* ================================================================================================================= */
 
 import fetch from "node-fetch";
 
-// Add atob for node.js
+import { inject } from "lepton-di";
 
-function atob(str: string): string
-{
-    return Buffer.from(str).toString("base64");
-}
+import { IRestClient, ILogger, IConfigProvider, Map } from "./interfaces";
+
+import { atob } from "./utils";
+
+/* ================================================================================================================= */
+
+const JSON_TYPE: string = "application/json";
+
+/* ================================================================================================================= */
 
 export class RestClient implements IRestClient
 {
-    private baseUri: string;
-    private creds: string;
-    private accountId: number;
+    private readonly baseUri: string;
+    private readonly creds: string;
+    private readonly accountId: number;
+
     private asAccountId?: number;
     
-    constructor(config: IConfigProvider)
+    constructor(@inject(IConfigProvider) config: IConfigProvider, @inject(ILogger) private readonly log?: ILogger)
     {
         this.baseUri = config.get("baseUri");
 
         let key = config.get("apiKey");
         let secret = config.get("secret");
 
-        // TODO: Add more checks on config values.
-
         if (!this.baseUri)
-        {
-            throw "Missing baseUri config";
-        }
+            throw new Error("Missing baseUri config");
 
         if (!key || !secret)
-        {
-            throw "Missing credentials in config";
-        }
+            throw new Error("Missing credentials in config");
         
         this.creds = "Basic " + atob(key + ":" + secret);
 
         this.accountId = config.get("accountId");
 
         if (!this.accountId)
-            throw "Missing accountId in config"
+            throw new Error("Missing accountId in config");
 
         this.asAccountId = null;
     }
@@ -71,69 +71,65 @@ export class RestClient implements IRestClient
         return uri.replace(/(\{.*?\})/g, replacer);
     }
 
-    public async get<T>(uri: string, args: any): Promise<T>
+    private parseType(type: string): string
+    {
+        let idx = type.indexOf(';');
+
+        if (idx === -1)
+            return type;
+
+        return type.substr(0, idx);
+    }
+
+    private async request<T>(method: string, uri: string, args: any, body?: any): Promise<T>
     {
         uri = this.subsitute(uri, args);
 
-        console.log("Requesting: " + this.baseUri + uri);
+        this.log?.debug(`${method}: ${this.baseUri}${uri}`);
+
+        let headers = {
+            "Authorization": this.creds,
+            "Content-Type": JSON_TYPE,
+            "Accept": JSON_TYPE
+        }
+
+        if (body && typeof body !== "string")
+            body = JSON.stringify(body);
 
         const response = await fetch(this.baseUri + uri, {
-            method: 'GET',
-            headers: {
-                "Authorization": this.creds,
-                "Accept": "application/json"
-            }
+            method: method,
+            body: body,
+            headers: headers
         });
 
-        return await response.json();
+        let ct = this.parseType(response.headers.get("Content-type"));
+
+        if (ct == JSON_TYPE)
+            return await response.json();
+
+        let text = await response.text();
+        this.log?.warn(`Unable to handle ${ct} response data: ${text}`);
+    }
+
+    public async get<T>(uri: string, args: any): Promise<T>
+    {
+        return await this.request<T>("GET", uri, args);
     }
 
     public async post<S, T>(uri: string, args: any, body: S): Promise<T>
     {
-        uri = this.subsitute(uri, args);
-
-        const response = await fetch(this.baseUri + uri, {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                "Authorization": this.creds,
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        });
-
-        return await response.json();
+        return await this.request<T>("POST", uri, args, body);
     }
 
     public async put<S, T>(uri: string, args: any, body: S): Promise<T>
     {
-        uri = this.subsitute(uri, args);
-
-        const response = await fetch(this.baseUri + uri, {
-            method: 'PUT',
-            body: JSON.stringify(body),
-            headers: {
-                "Authorization": this.creds,
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        });
-
-        return await response.json();
+        return await this.request<T>("PUT", uri, args, body);
     }
 
     public async delete<T>(uri: string, args: any): Promise<T>
     {
-        uri = this.subsitute(uri, args);
-
-        const response = await fetch(this.baseUri + uri, {
-            method: 'DELETE',
-            headers: {
-                "Authorization": this.creds,
-                "Accept": "application/json"
-            }
-        });
-
-        return await response.json();
+        return await this.request<T>("DELETE", uri, args);
     }
 }
+
+/* ================================================================================================================= */

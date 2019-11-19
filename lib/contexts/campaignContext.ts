@@ -1,3 +1,5 @@
+import { inject } from "lepton-di";
+
 import { IRestClient, ICollection } from "../interfaces";
 
 import { Campaign } from "../models";
@@ -9,9 +11,7 @@ const LIST: string = "account/{AccountId}/campaign?onlyMine={onlyMine}";
 
 export class CampaignContext implements ICampaignContext
 {
-    private readonly client: IRestClient;
-
-    public constructor(client: IRestClient)
+    public constructor(@inject(IRestClient) private readonly client: IRestClient)
     {
         this.client = client;
     }

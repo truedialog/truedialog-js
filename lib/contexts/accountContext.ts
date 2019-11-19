@@ -1,3 +1,5 @@
+import { inject } from "lepton-di";
+
 import { IRestClient, ICollection, IConfigProvider } from "../interfaces";
 
 import { Account } from "../models";
@@ -9,9 +11,7 @@ const LIST = "account";
 
 export class AccountContext implements IAccountContext
 {
-    private readonly client: IRestClient;
-
-    public constructor(client: IRestClient)
+    public constructor(@inject(IRestClient) private readonly client: IRestClient)
     {
         this.client = client;
     }

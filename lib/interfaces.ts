@@ -1,21 +1,33 @@
+/* ================================================================================================================= */
 
 export interface ICollection<T>
 {
     [index: number]: T;
 }
 
+/* ================================================================================================================= */
+
 export interface Map<T>
 {
     [K: string]: T;
 }
 
+/* ================================================================================================================= */
+/**
+ * Configuration abstraction
+ */
 export interface IConfigProvider
 {
     get(name: string): any;
 }
 
-export const IConfigPorivder: unique symbol = Symbol("td:sdk:configProvider");
+export const IConfigProvider: unique symbol = Symbol("td:sdk:configProvider");
 
+/* ================================================================================================================= */
+
+/**
+ * Rest call abstraction
+ */
 export interface IRestClient
 {
     asAccount(id: number): IRestClient;
@@ -27,3 +39,20 @@ export interface IRestClient
 }
 
 export const IRestClient: unique symbol = Symbol("td:sdk:restClient");
+
+/* ================================================================================================================= */
+/**
+ * Logging abstraction
+ */
+export interface ILogger
+{
+    trace(data: any, ...args: any[]): void;
+    debug(data: any, ...args: any[]): void;
+    info (data: any, ...args: any[]): void;
+    warn (data: any, ...args: any[]): void;
+    error(data: any, ...args: any[]): void;
+}
+
+export const ILogger: unique symbol = Symbol("td:sdk:logger");
+
+/* ================================================================================================================= */

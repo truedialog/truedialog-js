@@ -1,6 +1,11 @@
+/* ================================================================================================================= */
+
 import { ICollection } from "../interfaces";
 
-import { Account, BaseAccount, Campaign, ActionPushCampaign } from "../models";
+import { Account, Action, ActionBase, ActionPushCampaign, ActionHistory } from "../models";
+import { BaseAccount, Campaign } from "../models";
+
+/* ================================================================================================================= */
 
 interface IBaseContext<T extends BaseAccount>
 {
@@ -10,6 +15,8 @@ interface IBaseContext<T extends BaseAccount>
     update(item: T): Promise<T>;
     delete(item: T | number, accountId?: number): Promise<void>;
 }
+
+/* ================================================================================================================= */
 
 export interface IAccountContext
 {
@@ -21,6 +28,8 @@ export interface IAccountContext
 }
 
 export const IAccountContext: unique symbol = Symbol("td:sdk:context:account");
+
+/* ================================================================================================================= */
 
 export interface CampaignListOptions
 {
@@ -39,8 +48,34 @@ export interface ICampaignContext
 
 export const ICampaignContext: unique symbol = Symbol("td:sdk:context:campaign");
 
+/* ================================================================================================================= */
+
+export interface IActionContext extends IBaseContext<Action>
+{
+    /**
+     * Executes an action immediately.
+     * 
+     * @param item The action or ID to execute.
+     * @param accountId The account ID to execute.
+     */
+    execute(item: Action | ActionBase | number, accountId?: number): Promise<void>;
+
+    /**
+     * Fetches the execution history of an action.
+     * 
+     * @param item The action or ID to fetch the history of.s
+     */
+    getHistory(item: Action | ActionBase | number): Promise<ICollection<ActionHistory>>;
+}
+
+export const IActionContext: unique symbol = Symbol("td:sdk:context:action");
+
+/* ================================================================================================================= */
+
 export interface IActionPushCampaignContext extends IBaseContext<ActionPushCampaign>
 {
 }
 
 export const IActionPushCampaignContext: unique symbol = Symbol("td:sdk:context:action:pushCampaign");
+
+/* ================================================================================================================= */
