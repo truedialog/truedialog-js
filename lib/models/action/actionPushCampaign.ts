@@ -1,4 +1,3 @@
-import { ICollection } from "../../interfaces";
 import { ActionBase } from "./actionBase";
 
 export class ActionPushCampaign extends ActionBase
@@ -6,7 +5,7 @@ export class ActionPushCampaign extends ActionBase
     /**
      * The channels the campaign will be (or was) sent on.
      */
-    public Channels: ICollection<string>;
+    public Channels: string[];
 
     /**
      * Set to send message based on contact's AssignedId attribute.
@@ -21,7 +20,7 @@ export class ActionPushCampaign extends ActionBase
      * Note: In order for ths ystem to differentiate a phone number from a contact ID, phone numbers must be
      * prefixed with their country dialing code. E.g.: {@code (221) 555-0100} should be listed as {@code +12215550100}
      */
-    public Targets: ICollection<string>;
+    public Targets: string[];
 
     /**
      * A URL pointing to a list of targets to send to.
@@ -44,12 +43,12 @@ export class ActionPushCampaign extends ActionBase
      * using our Portal.  If you do create a contact list in this way, you can supply the generated ID here without
      * any issues.
      */
-    public ContactListIds: ICollection<number>;
+    public ContactListIds: number[];
 
     /**
      * A contact lists to suppress from contact list. (OPTIONAL)
      */
-    public ExcludeListIds: ICollection<number>;
+    public ExcludeListIds: number[];
 
     /**
      * The campaign to send (or was sent)

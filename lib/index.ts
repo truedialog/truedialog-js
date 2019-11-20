@@ -1,3 +1,5 @@
+/* ================================================================================================================= */
+
 export * from "./models";
 
 export * from "./interfaces";
@@ -6,17 +8,22 @@ export * from "./jsonConfig";
 
 export * from "./contexts";
 
+/* ================================================================================================================= */
+
 import { IContainer, Lifetime } from "lepton-di";
 
 import { tryRegister } from "./utils";
 
 import { tdjs_context } from "./contexts";
 
-import { ILogger, IRestClient, IConfigProvider } from "./interfaces";
+import { ILogger, IRestClient, IConfigProvider, IMessageSender } from "./interfaces";
 
 import { NullLogger } from "./nullLogger";
 import { JsonConfig } from "./jsonConfig";
 import { RestClient } from "./restClient";
+import { MessageSender } from "./messageSender";
+
+/* ================================================================================================================= */
 
 export module truedialog
 {
@@ -29,5 +36,9 @@ export module truedialog
         tryRegister(container, IRestClient, RestClient, Lifetime.Scoped);
 
         tdjs_context.register(container);
+
+        tryRegister(container, IMessageSender, MessageSender, Lifetime.Transient);
     }
 }
+
+/* ================================================================================================================= */

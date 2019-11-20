@@ -1,9 +1,6 @@
 /* ================================================================================================================= */
 
-export interface ICollection<T>
-{
-    [index: number]: T;
-}
+import { Campaign } from "./models";
 
 /* ================================================================================================================= */
 
@@ -54,5 +51,20 @@ export interface ILogger
 }
 
 export const ILogger: unique symbol = Symbol("td:sdk:logger");
+
+/* ================================================================================================================= */
+
+export interface IMessageSender
+{
+    campaign(item: Campaign): IMessageSender;
+    channel(c: string | string[]): IMessageSender;
+    to(target: string | string[]): IMessageSender;
+    from(source: string): IMessageSender;
+    message(text: string): IMessageSender;
+    subject(text: string): IMessageSender;
+    send(): Promise<void>;
+}
+
+export const IMessageSender: unique symbol = Symbol("td:sdk:messageSender");
 
 /* ================================================================================================================= */

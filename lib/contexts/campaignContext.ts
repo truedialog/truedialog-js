@@ -1,13 +1,19 @@
+/* ================================================================================================================= */
+
 import { inject } from "lepton-di";
 
-import { IRestClient, ICollection } from "../interfaces";
+import { IRestClient } from "../interfaces";
 
 import { Campaign } from "../models";
 
 import { ICampaignContext, CampaignListOptions } from "./interfaces";
 
+/* ================================================================================================================= */
+
 const ITEM: string = "account/{AccountId}/campaign/{Id}";
 const LIST: string = "account/{AccountId}/campaign?onlyMine={onlyMine}";
+
+/* ================================================================================================================= */
 
 export class CampaignContext implements ICampaignContext
 {
@@ -23,7 +29,7 @@ export class CampaignContext implements ICampaignContext
             .get(ITEM, { AccountId: accountId, Id: id });
     }
 
-    public async getAll(options?: CampaignListOptions): Promise<ICollection<Campaign>>
+    public async getAll(options?: CampaignListOptions): Promise<Campaign[]>
     {
         if (options)
             options.onlyMine = options.onlyMine || false;
@@ -68,3 +74,5 @@ export class CampaignContext implements ICampaignContext
             .delete(ITEM, { id: campaign, accountId: accountId });
     }
 }
+
+/* ================================================================================================================= */

@@ -2,7 +2,7 @@
 
 import { inject } from "lepton-di";
 
-import { IRestClient, ICollection } from "../../interfaces";
+import { IRestClient } from "../../interfaces";
 
 import { Action, ActionBase, ActionHistory } from "../../models";
 
@@ -43,7 +43,7 @@ export class ActionContext extends BaseContext<Action> implements IActionContext
             .post(ITEM + "/execute", { Id: item }, {});
     }
 
-    public async getHistory(item: ActionItem, accountId?: number): Promise<ICollection<ActionHistory>>
+    public async getHistory(item: ActionItem, accountId?: number): Promise<ActionHistory[]>
     {
         if (typeof item !== "number")
         {

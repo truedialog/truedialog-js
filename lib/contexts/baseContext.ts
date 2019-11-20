@@ -1,6 +1,10 @@
-import { IRestClient, ICollection } from "../interfaces";
+/* ================================================================================================================= */
+
+import { IRestClient } from "../interfaces";
 
 import { BaseAccount } from "../models";
+
+/* ================================================================================================================= */
 
 export class BaseContext<T extends BaseAccount>
 {
@@ -22,7 +26,7 @@ export class BaseContext<T extends BaseAccount>
             .get(this.itemUrl, { Id: id });
     }
 
-    public async getAll(accountId?: number): Promise<ICollection<T>>
+    public async getAll(accountId?: number): Promise<T[]>
     {
         return await this.client
             .asAccount(accountId)
@@ -62,3 +66,5 @@ export class BaseContext<T extends BaseAccount>
             .delete(this.itemUrl, { id: item, accountId: accountId });
     }
 }
+
+/* ================================================================================================================= */

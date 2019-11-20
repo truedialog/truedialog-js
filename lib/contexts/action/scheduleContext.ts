@@ -2,7 +2,7 @@
 
 import { inject } from "lepton-di";
 
-import { IRestClient, ICollection } from "../../interfaces";
+import { IRestClient } from "../../interfaces";
 
 import { ActionSchedule } from "../../models";
 
@@ -28,7 +28,7 @@ export class ScheduleContext implements IScheduleContext
             .get(ITEM, { AccountId: accountId, ActionId: actionId, id: scheduleId });
     }
 
-    public async getAll(accountId: number, actionId: number): Promise<ICollection<ActionSchedule>>
+    public async getAll(accountId: number, actionId: number): Promise<ActionSchedule[]>
     {
         return await this.client
             .asAccount(accountId)

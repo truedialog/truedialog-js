@@ -1,5 +1,4 @@
 import { Base } from "../base";
-import { ICollection } from "../../interfaces";
 
 import { AccountAttribute } from "./accountAttribute";
 
@@ -40,7 +39,7 @@ export class Account extends Base
      */
     public Channels: [number];
 
-    public Attributes: ICollection<AccountAttribute>;
+    public Attributes: AccountAttribute[];
 
     /**
      * 

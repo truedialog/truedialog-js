@@ -1,5 +1,3 @@
-import { ICollection } from "../../interfaces";
-
 import { BaseAudited } from "../base";
 
 export class ActionLog
@@ -39,5 +37,5 @@ export class ActionHistory extends BaseAudited
 
     public Message: string;
 
-    public Logs: ICollection<ActionLog>;
+    public Logs: ActionLog[];
 }

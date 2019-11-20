@@ -1,7 +1,5 @@
 /* ================================================================================================================= */
 
-import { ICollection } from "../../interfaces";
-
 import { ContactSubscription } from "../contact";
 
 import { ActionBase } from "./actionBase";
@@ -18,7 +16,7 @@ export class ActionImport extends ActionBase
     /**
      * A list of subscriptions that should be added or modified for each of the contacts in the supplied file.
      */
-    public Subscriptions: ICollection<ContactSubscription>;
+    public Subscriptions: ContactSubscription[];
 
     /**
      * If set, creates a contact list from this import.

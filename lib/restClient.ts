@@ -96,8 +96,13 @@ export class RestClient implements IRestClient
             "Accept": JSON_TYPE
         }
 
-        if (body && typeof body !== "string")
-            body = JSON.stringify(body);
+        if (body)
+        {
+            if (typeof body !== "string")
+                body = JSON.stringify(body);
+
+            this.log.trace("BODY: ", body);
+        }
 
         const response = await fetch(this.baseUri + uri, {
             method: method,

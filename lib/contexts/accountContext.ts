@@ -1,13 +1,19 @@
+/* ================================================================================================================= */
+
 import { inject } from "lepton-di";
 
-import { IRestClient, ICollection, IConfigProvider } from "../interfaces";
+import { IRestClient } from "../interfaces";
 
 import { Account } from "../models";
 
 import { IAccountContext } from "./interfaces";
 
+/* ================================================================================================================= */
+
 const ITEM = "account/{Id}";
 const LIST = "account";
+
+/* ================================================================================================================= */
 
 export class AccountContext implements IAccountContext
 {
@@ -21,7 +27,7 @@ export class AccountContext implements IAccountContext
         return await this.client.get(ITEM, { Id: id });
     }
 
-    public async getAll(): Promise<ICollection<Account>>
+    public async getAll(): Promise<Account[]>
     {
         return await this.client.get(LIST, {});
     }
@@ -44,3 +50,5 @@ export class AccountContext implements IAccountContext
         await this.client.delete(ITEM, { Id: account });
     }
 }
+
+/* ================================================================================================================= */

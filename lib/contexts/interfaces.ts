@@ -1,7 +1,5 @@
 /* ================================================================================================================= */
 
-import { ICollection } from "../interfaces";
-
 import { Account } from "../models";
 
 import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, ActionSchedule } from "../models";
@@ -15,7 +13,7 @@ import { Contact } from "../models";
 interface IBaseContext<T extends BaseAccount>
 {
     get(id: number, accountId?: number): Promise<T>;
-    getAll(accountId?: number): Promise<ICollection<T>>;
+    getAll(accountId?: number): Promise<T[]>;
     create(item: T, accountId?: number): Promise<T>;
     update(item: T): Promise<T>;
     delete(item: T | number, accountId?: number): Promise<void>;
@@ -26,7 +24,7 @@ interface IBaseContext<T extends BaseAccount>
 export interface IAccountContext
 {
     get(id: number): Promise<Account>;
-    getAll(): Promise<ICollection<Account>>;
+    getAll(): Promise<Account[]>;
     create(account: Account): Promise<Account>;
     update(account: Account): Promise<Account>;
     delete(account: number | Account): Promise<void>;
@@ -45,7 +43,7 @@ export interface CampaignListOptions
 export interface ICampaignContext
 {
     get(id: number, accountId?: number): Promise<Campaign>;
-    getAll(options?: CampaignListOptions): Promise<ICollection<Campaign>>;
+    getAll(options?: CampaignListOptions): Promise<Campaign[]>;
     create(campaign: Campaign, accountId?: number): Promise<Campaign>;
     update(campaign: Campaign): Promise<Campaign>;
     delete(campaign: Campaign | number, accountId?: number): Promise<void>;
@@ -70,7 +68,7 @@ export interface IActionContext extends IBaseContext<Action>
      * 
      * @param item The action or ID to fetch the history of.s
      */
-    getHistory(item: Action | ActionBase | number): Promise<ICollection<ActionHistory>>;
+    getHistory(item: Action | ActionBase | number): Promise<ActionHistory[]>;
 }
 
 export const IActionContext: unique symbol = Symbol("td:sdk:context:action");
@@ -96,7 +94,7 @@ export const IImportContext: unique symbol = Symbol("td:sdk:context:action:impor
 export interface IScheduleContext
 {
     get(accountId: number, actionId: number, id: number): Promise<ActionSchedule>;
-    getAll(accountId: number, actionId: number): Promise<ICollection<ActionSchedule>>;
+    getAll(accountId: number, actionId: number): Promise<ActionSchedule[]>;
     create(item: ActionSchedule, accountId?: number, actionId?: number): Promise<ActionSchedule>;
     update(item: ActionSchedule): Promise<ActionSchedule>;
     delete(item: ActionSchedule | number, accountId?: number, actionId?: number): Promise<void>;

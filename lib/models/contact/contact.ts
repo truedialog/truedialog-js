@@ -1,7 +1,5 @@
 /* ================================================================================================================= */
 
-import { ICollection } from "../../interfaces";
-
 import { SoftDeletable } from "../base";
 
 import { ContactAttribute } from "./contactAttribute";
@@ -24,12 +22,12 @@ export class Contact extends SoftDeletable
     /**
      * List of attributes set on this contact.
      */
-    public Attributes: ICollection<ContactAttribute>;
+    public Attributes: ContactAttribute[];
 
     /**
      * List of subscription details for this contact.
      */
-    public Subscriptions: ICollection<ContactSubscription>;
+    public Subscriptions: ContactSubscription[];
 }
 
 /* ================================================================================================================= */
