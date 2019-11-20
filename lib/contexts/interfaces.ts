@@ -4,9 +4,11 @@ import { ICollection } from "../interfaces";
 
 import { Account } from "../models";
 
-import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport } from "../models";
+import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, ActionSchedule } from "../models";
 
 import { BaseAccount, Campaign } from "../models";
+
+import { Contact } from "../models";
 
 /* ================================================================================================================= */
 
@@ -88,5 +90,26 @@ export interface IImportContext extends IBaseContext<ActionImport>
 }
 
 export const IImportContext: unique symbol = Symbol("td:sdk:context:action:import");
+
+/* ================================================================================================================= */
+
+export interface IScheduleContext
+{
+    get(accountId: number, actionId: number, id: number): Promise<ActionSchedule>;
+    getAll(accountId: number, actionId: number): Promise<ICollection<ActionSchedule>>;
+    create(item: ActionSchedule, accountId?: number, actionId?: number): Promise<ActionSchedule>;
+    update(item: ActionSchedule): Promise<ActionSchedule>;
+    delete(item: ActionSchedule | number, accountId?: number, actionId?: number): Promise<void>;
+}
+
+export const IScheduleContext: unique symbol = Symbol("td:sdk:context:action:schedule");
+
+/* ================================================================================================================= */
+
+export interface IContactContext extends IBaseContext<Contact>
+{
+}
+
+export const IContactContext: unique symbol = Symbol("td:sdk:context:contact");
 
 /* ================================================================================================================= */

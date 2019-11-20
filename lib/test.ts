@@ -1,7 +1,7 @@
 import { using, Container } from "lepton-di";
 
 import { truedialog, ILogger, IActionContext, IMessageContext } from ".";
-import { IImportContext } from "./contexts";
+import { IImportContext, IContactContext } from "./contexts";
 
 var container = new Container();
 
@@ -30,9 +30,16 @@ using (container.beginScope(), scope =>
         });
     */
 
+    /*
     var importCtx: IImportContext = scope.resolve(IImportContext);
 
     importCtx
+        .getAll()
+        .then(x => console.log(x));
+    */
+
+    var contactCtx: IContactContext = scope.resolve(IContactContext);
+    contactCtx
         .getAll()
         .then(x => console.log(x));
 });

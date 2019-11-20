@@ -39,7 +39,7 @@ export class BaseContext<T extends BaseAccount>
     public async update(item: T): Promise<T>
     {
         if (!item.Id)
-            throw "Invalid item ID";
+            throw new Error("Invalid item ID");
 
         return await this.client
             .asAccount(item.AccountId)
@@ -55,7 +55,7 @@ export class BaseContext<T extends BaseAccount>
         }
 
         if (!item)
-            throw "Invalid item ID";
+            throw new Error("Invalid item ID");
 
         await this.client
             .asAccount(accountId)

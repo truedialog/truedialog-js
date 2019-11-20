@@ -19,6 +19,8 @@ export class ContactSubscription
 
     /**
      * Set if the contact wishes to receive MMS messages.
+     * 
+     * Not implemented, do not use
      */
     public MmsEnabled: boolean;
 

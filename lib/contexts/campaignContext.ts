@@ -45,7 +45,7 @@ export class CampaignContext implements ICampaignContext
     public async update(campaign: Campaign): Promise<Campaign>
     {
         if (!campaign.Id)
-            throw "Invalid campaign ID";
+            throw new Error("Invalid campaign ID");
 
         return await this.client
             .asAccount(campaign.AccountId)
@@ -61,7 +61,7 @@ export class CampaignContext implements ICampaignContext
         }
 
         if (!campaign)
-            throw "Invalid campaign ID";
+            throw new Error("Invalid campaign ID");
 
         await this.client
             .asAccount(accountId)
