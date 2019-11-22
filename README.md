@@ -1,1 +1,2 @@
-Updating the read me for a test.
+# truedialog-js
+A JavaScript/TypeScript SDK for interfacing with the TrueDialog APIs.
