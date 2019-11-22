@@ -1,11 +1,10 @@
 /* ================================================================================================================= */
 
-export class Base
-{
-    /**
-     * The unique ID of this object.
-     */
-    public Id: number;
-}
+export * from "./actionType";
+export * from "./campaignType";
+export * from "./channelType";
+export * from "./languageType";
+export * from "./resourceStatus";
+export * from "./scheduleType";
 
 /* ================================================================================================================= */

@@ -6,7 +6,11 @@ import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, Ac
 
 import { BaseAccount, Campaign } from "../models";
 
+import { Channel } from "../models";
+
 import { Contact } from "../models";
+
+import { LongCode } from "../models";
 
 /* ================================================================================================================= */
 
@@ -50,6 +54,34 @@ export interface ICampaignContext
 }
 
 export const ICampaignContext: unique symbol = Symbol("td:sdk:context:campaign");
+
+/* ================================================================================================================= */
+
+export interface IChannelContext
+{
+    getAll(accountId?: number): Promise<Channel[]>;
+}
+
+export const IChannelContext: unique symbol = Symbol("td:sdk:context:channel");
+
+/* ================================================================================================================= */
+
+export interface ILongCodeContext
+{
+    getAllSimple(accountId?: number): Promise<string[]>;
+
+    getAll(accountId?: number): Promise<LongCode[]>;
+
+    get(ani: string, accountId?: number): Promise<LongCode>;
+
+    setForwarding(fromAni: string, toAni: string, accountId?: number): Promise<LongCode>;
+
+    removeForwarding(fromAni: string, accountId?: number): Promise<LongCode>;
+
+    verifyForwarding(fromAni: string, code: string, accountId?: number): Promise<boolean>;
+}
+
+export const ILongCodeContext: unique symbol = Symbol("td:sdk:context:longCode");
 
 /* ================================================================================================================= */
 

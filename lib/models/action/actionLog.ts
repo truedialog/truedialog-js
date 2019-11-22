@@ -1,11 +1,12 @@
 /* ================================================================================================================= */
 
-export class Base
+export class ActionLog
 {
-    /**
-     * The unique ID of this object.
-     */
-    public Id: number;
+    public RunId: number;
+
+    public Message: string;
+
+    public LogDate: Date;
 }
 
 /* ================================================================================================================= */

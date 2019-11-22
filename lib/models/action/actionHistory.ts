@@ -1,13 +1,10 @@
+/* ================================================================================================================= */
+
 import { BaseAudited } from "../base";
 
-export class ActionLog
-{
-    public RunId: number;
+import { ActionLog } from "./actionLog";
 
-    public Message: string;
-
-    public LogDate: Date;
-}
+/* ================================================================================================================= */
 
 export class ActionHistory extends BaseAudited
 {
@@ -39,3 +36,5 @@ export class ActionHistory extends BaseAudited
 
     public Logs: ActionLog[];
 }
+
+/* ================================================================================================================= */

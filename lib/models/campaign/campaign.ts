@@ -1,15 +1,10 @@
+/* ================================================================================================================= */
+
 import { SoftDeletable } from "../base";
 
-export enum CampaignType
-{
-    Gateway = 0,
-    Basic = 1,
-    Dialog = 2,
-    Question = 3,
-    Coupon = 4,
-    Sweepstakes = 5,
-    Chat = 6
-}
+import { CampaignType } from "../../enums";
+
+/* ================================================================================================================= */
 
 export class Campaign extends SoftDeletable
 {
@@ -82,3 +77,5 @@ export class Campaign extends SoftDeletable
         this.CampaignTypeId = type;
     }
 }
+
+/* ================================================================================================================= */

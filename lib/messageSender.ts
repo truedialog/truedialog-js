@@ -1,6 +1,8 @@
+/* ================================================================================================================= */
+
 import { inject } from "lepton-di";
 
-import { ActionPushCampaign, Campaign, CampaignType } from "./models";
+import { ActionPushCampaign } from "./models";
 import { IMessageContext } from "./contexts";
 import { IMessageSender } from "./interfaces";
 
