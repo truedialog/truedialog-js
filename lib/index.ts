@@ -7,6 +7,7 @@ export * from "./restClient";
 export * from "./jsonConfig";
 
 export * from "./contexts";
+export * from "./messageSender";
 
 /* ================================================================================================================= */
 

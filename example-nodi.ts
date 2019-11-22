@@ -1,25 +1,17 @@
-import { JsonConfig, RestClient } from "./lib";
-import { CampaignContext } from "./lib/contexts/campaignContext";
-import { MessageContext } from "./lib/contexts/action";
-import { MessageSender } from "./lib/messageSender";
-import { NullLogger } from "./lib/nullLogger";
-
 // Example without using lepton DI.
 
+import { JsonConfig, RestClient, MessageContext, MessageSender } from "./lib";
+
 let config = new JsonConfig();
-let log = new NullLogger();
-let client = new RestClient(config, log);
-let campaignCtx = new CampaignContext(client);
+let client = new RestClient(config);
 let messageCtx = new MessageContext(client);
 let msgSender = new MessageSender(messageCtx);
 
-campaignCtx
-    .get(0) // <-- Set a valid campaign ID here.
-    .then(x => {
-        msgSender
-            .campaign(x)
-            .channel("+1<LONG CODE TO SEND FORM HERE>")
-            .message("This is a NodeJS test!")
-            .to("+1<PHONE NUMBER TO SEND TO HERE>")
-            .send();
-    });
+msgSender
+    .campaign(0) // <-- Set a valid campaign ID here.
+    .channel("+1<LONG CODE TO SEND FORM HERE>")
+    .message("This is a NodeJS test!")
+    .to("+1<PHONE NUMBER TO SEND TO HERE>")
+    .send()
+    .then(() => console.log("Message sent"))
+    .catch(e => console.log(`Error: ${e}`));

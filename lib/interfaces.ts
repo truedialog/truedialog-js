@@ -56,7 +56,7 @@ export const ILogger: unique symbol = Symbol("td:sdk:logger");
 
 export interface IMessageSender
 {
-    campaign(item: Campaign): IMessageSender;
+    campaign(id: number): IMessageSender;
     channel(c: string | string[]): IMessageSender;
     to(target: string | string[]): IMessageSender;
     from(source: string): IMessageSender;

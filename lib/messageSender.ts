@@ -8,7 +8,7 @@ import { IMessageSender } from "./interfaces";
 
 export class MessageSender implements IMessageSender
 {
-    private m_campaign: Campaign;
+    private m_campaignId: number;
     private m_channels: string[] = [];
     private m_to: string[] = [];
     private m_from: string;
@@ -20,9 +20,9 @@ export class MessageSender implements IMessageSender
     {
     }
 
-    public campaign(item: Campaign): IMessageSender
+    public campaign(id: number): IMessageSender
     {
-        this.m_campaign = item;
+        this.m_campaignId = id;
         return this;       
     }
 
@@ -69,7 +69,7 @@ export class MessageSender implements IMessageSender
      */
     private validate(): void
     {
-        if (!this.m_campaign)
+        if (!this.m_campaignId)
             throw new Error("No campaign set.");
 
         if (!this.m_to.length)
@@ -77,14 +77,6 @@ export class MessageSender implements IMessageSender
 
         if (!this.m_channels.length)
             throw new Error("No channels added.");
-
-        switch (this.m_campaign.CampaignType)
-        {
-        case CampaignType.Gateway:
-            if (!this.m_message)
-                throw new Error("Gateway campaigns require a message.");
-            break;
-        }
     }
 
     public async send(): Promise<void>
@@ -93,7 +85,7 @@ export class MessageSender implements IMessageSender
 
         var push = new ActionPushCampaign();
         push.Targets = this.m_to,
-        push.CampaignId = this.m_campaign.Id;
+        push.CampaignId = this.m_campaignId;
         push.Message = this.m_message;
         push.From = this.m_from;
         push.Subject = this.m_subject;
