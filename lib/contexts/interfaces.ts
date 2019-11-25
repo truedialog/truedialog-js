@@ -130,6 +130,17 @@ export const IExternalCouponListContext: unique symbol = Symbol("td:sdk:context:
 
 /* ================================================================================================================= */
 
+export interface IExternalCouponCodeContext
+{
+    get(code: string, listId: number, accountId?: number): Promise<ExternalCouponCode>;
+    getAll(listId: number, accountId?: number): Promise<ExternalCouponCode[]>;
+    delete(code: string, listId: number, accountId?: number): Promise<void>;
+}
+
+export const IExternalCouponCodeContext: unique symbol = Symbol("td:sdk:context:externalCouponCode");
+
+/* ================================================================================================================= */
+
 export interface IChannelContext
 {
     getAll(accountId?: number): Promise<Channel[]>;

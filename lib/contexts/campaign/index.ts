@@ -7,5 +7,6 @@ export * from "./answerContext";
 export * from "./couponContext";
 export * from "./couponOfferContext";
 export * from "./externalCouponListContext";
+export * from "./externalCouponCodeContext";
 
 /* ================================================================================================================= */

@@ -8,6 +8,8 @@ import { ExternalCouponList, ExternalCouponCode } from "../../models";
 
 import { BaseContext } from "../baseContext";
 
+import { IExternalCouponListContext } from "../interfaces";
+
 /* ================================================================================================================= */
 
 const LIST: string = "/account/{AccountId}/external-couponlist";
@@ -16,7 +18,7 @@ const CODE_LIST: string = "/account/{AccountId}/external-couponlist/{Id}/code";
 
 /* ================================================================================================================= */
 
-export class ExternalCouponListContext extends BaseContext<ExternalCouponList>
+export class ExternalCouponListContext extends BaseContext<ExternalCouponList> implements IExternalCouponListContext
 {
     constructor(@inject(IRestClient) client: IRestClient)
     {
