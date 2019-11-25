@@ -7,7 +7,8 @@ import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, Ac
 import { BaseAccount } from "../models";
 
 import { Campaign, Survey, Question, Answer } from "../models";
-import { CouponDefinition, CouponRedemption, CouponRedemptionDetails } from "../models";
+import { CouponDefinition, CouponRedemption, CouponRedemptionDetails, CouponOffer } from "../models";
+import { ExternalCouponList, ExternalCouponCode } from "../models";
 
 import { Channel } from "../models";
 
@@ -108,6 +109,27 @@ export const ICouponContext: unique symbol = Symbol("td:sdk:context:coupon");
 
 /* ================================================================================================================= */
 
+export interface ICouponOfferContext
+{
+    get(id: number, accountId?: number): Promise<CouponOffer>;
+    create(couponOffer: CouponOffer, campaignId: number, accountId?: number): Promise<CouponOffer>;
+    update(couponOffer: CouponOffer, accountId?: number): Promise<CouponOffer>;
+    delete(id: number, accountId?: number): Promise<void>;
+}
+
+export const ICouponOfferContext: unique symbol = Symbol("td:sdk:context:couponOffer");
+
+/* ================================================================================================================= */
+
+export interface IExternalCouponListContext extends IBaseContext<ExternalCouponList>
+{
+    getCodes(id: number, accountId?: number): Promise<ExternalCouponCode[]>;
+}
+
+export const IExternalCouponListContext: unique symbol = Symbol("td:sdk:context:externalCouponList");
+
+/* ================================================================================================================= */
+
 export interface IChannelContext
 {
     getAll(accountId?: number): Promise<Channel[]>;
@@ -120,15 +142,10 @@ export const IChannelContext: unique symbol = Symbol("td:sdk:context:channel");
 export interface ILongCodeContext
 {
     getAllSimple(accountId?: number): Promise<string[]>;
-
     getAll(accountId?: number): Promise<LongCode[]>;
-
     get(ani: string, accountId?: number): Promise<LongCode>;
-
     setForwarding(fromAni: string, toAni: string, accountId?: number): Promise<LongCode>;
-
     removeForwarding(fromAni: string, accountId?: number): Promise<LongCode>;
-
     verifyForwarding(fromAni: string, code: string, accountId?: number): Promise<boolean>;
 }
 
