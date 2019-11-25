@@ -10,8 +10,8 @@ import { Answer } from "../../models";
 
 /* ================================================================================================================= */
 
-const ITEM: string = "account/{accountId}/campaign/{campaignId}/question/answer/{Id}";
-const LIST: string = "account/{accountId}/campaign/{campaignId}/question/answer";
+const ITEM: string = "account/{AccountId}/campaign/{CampaignId}/question/answer/{Id}";
+const LIST: string = "account/{AccountId}/campaign/{CampaignId}/question/answer";
 
 /* ================================================================================================================= */
 

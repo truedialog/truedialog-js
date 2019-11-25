@@ -7,6 +7,7 @@ import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, Ac
 import { BaseAccount } from "../models";
 
 import { Campaign, Survey, Question, Answer } from "../models";
+import { CouponDefinition, CouponRedemption, CouponRedemptionDetails } from "../models";
 
 import { Channel } from "../models";
 
@@ -91,6 +92,19 @@ export interface IAnswerContext
 }
 
 export const IAnswerContext: unique symbol = Symbol("td:sdk:context:answer");
+
+/* ================================================================================================================= */
+
+export interface ICouponContext
+{
+    get(id: number, accountId?: number): Promise<CouponDefinition>;
+    create(coupon: CouponDefinition, id: number, accountId?: number): Promise<CouponDefinition>;
+    update(coupon: CouponDefinition, accountId?: number): Promise<CouponDefinition>;
+    redeem(code: string, accountId?: number): Promise<CouponRedemption>;
+    getRedemptionDetails(id: number, accountId?: number): Promise<CouponRedemptionDetails>;
+}
+
+export const ICouponContext: unique symbol = Symbol("td:sdk:context:coupon");
 
 /* ================================================================================================================= */
 

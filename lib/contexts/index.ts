@@ -16,14 +16,14 @@ import { IContainer, Lifetime } from "lepton-di";
 
 import { IAccountContext, } from "./interfaces";
 import { IActionContext, IMessageContext, IImportContext, IScheduleContext } from "./interfaces";
-import { ICampaignContext, ISurveyContext, IQuestionContext, IAnswerContext } from "./interfaces";
+import { ICampaignContext, ISurveyContext, IQuestionContext, IAnswerContext, ICouponContext } from "./interfaces";
 import { IChannelContext } from "./interfaces";
 import { IContactContext } from "./interfaces";
 import { ILongCodeContext } from "./interfaces";
 
 import { AccountContext } from "./accountContext";
 import { ActionContext, MessageContext, ImportContext, ScheduleContext } from "./action";
-import { CampaignContext, SurveyContext, QuestionContext, AnswerContext } from "./campaign";
+import { CampaignContext, SurveyContext, QuestionContext, AnswerContext, CouponContext } from "./campaign";
 import { ChannelContext } from "./channel";
 import { ContactContext } from "./contactContext";
 import { LongCodeContext } from "./channel";
@@ -45,6 +45,7 @@ export module tdjs_context
         tryRegister(container, ISurveyContext, SurveyContext, Lifetime.Scoped);
         tryRegister(container, IQuestionContext, QuestionContext, Lifetime.Scoped);
         tryRegister(container, IAnswerContext, AnswerContext, Lifetime.Scoped);
+        tryRegister(container, ICouponContext, CouponContext, Lifetime.Scoped);
         tryRegister(container, IChannelContext, ChannelContext, Lifetime.Scoped);
         tryRegister(container, IContactContext, ContactContext, Lifetime.Scoped);
         tryRegister(container, ILongCodeContext, LongCodeContext, Lifetime.Scoped);
