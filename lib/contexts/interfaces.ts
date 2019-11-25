@@ -4,7 +4,9 @@ import { Account } from "../models";
 
 import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, ActionSchedule } from "../models";
 
-import { BaseAccount, Campaign } from "../models";
+import { BaseAccount } from "../models";
+
+import { Campaign, Survey, Question, Answer } from "../models";
 
 import { Channel } from "../models";
 
@@ -54,6 +56,41 @@ export interface ICampaignContext
 }
 
 export const ICampaignContext: unique symbol = Symbol("td:sdk:context:campaign");
+
+/* ================================================================================================================= */
+
+export interface ISurveyContext
+{
+    get(id: number, accountId?: number): Promise<Survey>;
+    create(id: number, survey: Survey, accountId?: number): Promise<Survey>;
+    update(survey: Survey, accountId?: number): Promise<Survey>;
+}
+
+export const ISurveyContext: unique symbol = Symbol("td:sdk:context:survey");
+
+/* ================================================================================================================= */
+
+export interface IQuestionContext
+{
+    get(id: number, accountId?: number): Promise<Question>;
+    create(id: number, question: Question, accountId?: number): Promise<Question>;
+    update(question: Question, accountId?: number): Promise<Question>;
+}
+
+export const IQuestionContext: unique symbol = Symbol("td:sdk:context:question");
+
+/* ================================================================================================================= */
+
+export interface IAnswerContext
+{
+    getAll(campaignId: number, accountId?: number): Promise<Answer[]>;
+    get(id: number, campaignId: number, accountId?: number): Promise<Answer>;
+    create(campaignId: number, answer: Answer, accountId?: number): Promise<Answer>;
+    update(answer: Answer, accountId?: number): Promise<Answer>;
+    delete(answer: Answer, accountId?: number): Promise<void>;
+}
+
+export const IAnswerContext: unique symbol = Symbol("td:sdk:context:answer");
 
 /* ================================================================================================================= */
 

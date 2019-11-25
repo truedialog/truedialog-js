@@ -2,11 +2,11 @@
 
 import { inject } from "lepton-di";
 
-import { IRestClient } from "../interfaces";
+import { IRestClient } from "../../interfaces";
 
-import { Campaign } from "../models";
+import { Campaign } from "../../models";
 
-import { ICampaignContext, CampaignListOptions } from "./interfaces";
+import { ICampaignContext, CampaignListOptions } from "../interfaces";
 
 /* ================================================================================================================= */
 
@@ -26,7 +26,7 @@ export class CampaignContext implements ICampaignContext
     {
         return await this.client
             .asAccount(accountId)
-            .get(ITEM, { AccountId: accountId, Id: id });
+            .get(ITEM, { Id: id });
     }
 
     public async getAll(options?: CampaignListOptions): Promise<Campaign[]>
@@ -45,7 +45,7 @@ export class CampaignContext implements ICampaignContext
     {
         return await this.client
             .asAccount(accountId)
-            .post(LIST, { accountId: accountId }, campaign);
+            .post(LIST, { }, campaign);
     }
 
     public async update(campaign: Campaign): Promise<Campaign>
@@ -55,7 +55,7 @@ export class CampaignContext implements ICampaignContext
 
         return await this.client
             .asAccount(campaign.AccountId)
-            .put(ITEM, { id: campaign.Id, accountId: campaign.AccountId }, campaign);
+            .put(ITEM, { id: campaign.Id }, campaign);
     }
 
     public async delete(campaign: Campaign | number, accountId?: number): Promise<void>
@@ -71,7 +71,7 @@ export class CampaignContext implements ICampaignContext
 
         await this.client
             .asAccount(accountId)
-            .delete(ITEM, { id: campaign, accountId: accountId });
+            .delete(ITEM, { id: campaign });
     }
 }
 
