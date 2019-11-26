@@ -6,7 +6,8 @@ import { Action, ActionBase, ActionPushCampaign, ActionHistory, ActionImport, Ac
 
 import { BaseAccount } from "../models";
 
-import { Campaign, Survey, Question, Answer } from "../models";
+import { Campaign, CampaignId } from "../models";
+import { Survey, Question, Answer } from "../models";
 import { CouponDefinition, CouponRedemption, CouponRedemptionDetails, CouponOffer } from "../models";
 import { ExternalCouponList, ExternalCouponCode } from "../models";
 import { Link } from "../models";
@@ -16,6 +17,8 @@ import { Channel } from "../models";
 import { Contact } from "../models";
 
 import { LongCode } from "../models";
+
+import { Keyword, KeywordId } from "../models";
 
 /* ================================================================================================================= */
 
@@ -229,5 +232,22 @@ export interface IContactContext extends IBaseContext<Contact>
 }
 
 export const IContactContext: unique symbol = Symbol("td:sdk:context:contact");
+
+/* ================================================================================================================= */
+
+export interface IKeywordContext
+{
+    getAll(accountId?: number): Promise<Keyword[]>;
+    getAllOnChannel(channel: string, accountId?: number): Promise<Keyword[]>;
+    get(channel: string, keyword: string, accountId?: number): Promise<Keyword>;
+    getContacts(channel: string, keyword: KeywordId, accountId?: number): Promise<Contact[]>;
+    create(channel: string, keyword: KeywordId, accountId?: number): Promise<Keyword>;
+    delete(channel: string, keyword: KeywordId, accountId?: number): Promise<void>;
+    getAttachedCampaign(channel: string, keyword: KeywordId, accountId?: number): Promise<Campaign>;
+    attachCampaign(campaign: CampaignId, channel: string, keyword: KeywordId, accountId?: number): Promise<void>;
+    detachCampaign(channel: string, keyword: KeywordId, accountId?: number): Promise<void>;
+}
+
+export const IKeywordContext: unique symbol = Symbol("td:sdk:context:keyword");
 
 /* ================================================================================================================= */

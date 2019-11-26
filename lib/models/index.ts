@@ -7,5 +7,6 @@ export * from "./action";
 export * from "./campaign";
 export * from "./channel";
 export * from "./contact";
+export * from "./keyword";
 
 /* ================================================================================================================= */

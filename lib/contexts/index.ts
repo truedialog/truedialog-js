@@ -9,6 +9,7 @@ export * from "./accountContext";
 export * from "./campaign";
 export * from "./channel";
 export * from "./contactContext";
+export * from "./keywordContext";
 
 /* ================================================================================================================= */
 
@@ -22,6 +23,7 @@ import { ILinkContext } from "./interfaces";
 import { IChannelContext } from "./interfaces";
 import { IContactContext } from "./interfaces";
 import { ILongCodeContext } from "./interfaces";
+import { IKeywordContext } from "./interfaces";
 
 import { AccountContext } from "./accountContext";
 import { ActionContext, MessageContext, ImportContext, ScheduleContext } from "./action";
@@ -31,6 +33,7 @@ import { LinkContext } from "./campaign";
 import { ChannelContext } from "./channel";
 import { ContactContext } from "./contactContext";
 import { LongCodeContext } from "./channel";
+import { KeywordContext } from "./keywordContext";
 
 import { tryRegister } from "../utils";
 
@@ -56,6 +59,7 @@ export module tdjs_context
         tryRegister(container, IChannelContext           , ChannelContext           , Lifetime.Scoped);
         tryRegister(container, IContactContext           , ContactContext           , Lifetime.Scoped);
         tryRegister(container, ILongCodeContext          , LongCodeContext          , Lifetime.Scoped);
+        tryRegister(container, IKeywordContext           , KeywordContext           , Lifetime.Scoped);
     }
 }
 
