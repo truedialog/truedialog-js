@@ -9,6 +9,7 @@ import { BaseAccount } from "../models";
 import { Campaign, Survey, Question, Answer } from "../models";
 import { CouponDefinition, CouponRedemption, CouponRedemptionDetails, CouponOffer } from "../models";
 import { ExternalCouponList, ExternalCouponCode } from "../models";
+import { Link } from "../models";
 
 import { Channel } from "../models";
 
@@ -138,6 +139,14 @@ export interface IExternalCouponCodeContext
 }
 
 export const IExternalCouponCodeContext: unique symbol = Symbol("td:sdk:context:externalCouponCode");
+
+/* ================================================================================================================= */
+
+export interface ILinkContext extends IBaseContext<Link>
+{
+}
+
+export const ILinkContext: unique symbol = Symbol("td:sdk:context:link");
 
 /* ================================================================================================================= */
 

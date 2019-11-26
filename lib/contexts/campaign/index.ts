@@ -8,5 +8,6 @@ export * from "./couponContext";
 export * from "./couponOfferContext";
 export * from "./externalCouponListContext";
 export * from "./externalCouponCodeContext";
+export * from "./linkContext";
 
 /* ================================================================================================================= */
